@@ -1,10 +1,16 @@
 window.onload = main;
 
-let isGosper = false; 
-let isPenta = false; 
-let isBlinker = false; 
-let isBeacon = false;
-let isMonogram = false; 
+let backGroundColors = ['darkblue', 'black', 'red', 'green', 'yellow', 'white' ];
+let foreGroundColors = ['yellow', 'white', 'darkblue', 'yellow', 'blue' , 'black'];
+let count = 0; 
+
+let colors = document.getElementById('color');
+colors.onclick = () => {
+  count++;
+  if(count > 4){
+    count = 0; 
+  }
+}
 
 let speed = 10;
 function main() {
@@ -25,44 +31,6 @@ speedUp.onclick = () => {
 let slowDown = document.getElementById('slowDown');
 slowDown.onclick = () => {speed++;}
 
-/** Add Gosper gun to the board */
-
-// let gosper = document.getElementById('gosper');
-// gosper.onclick = ()=>{
-// isGosper = !isGosper;
-// }
-// /** Add penta to the board */
-
-// let penta = document.getElementById('penta');
-// penta.onclick = ()=>{
-//   isPenta = !isPenta;
-// }
-// /** Add blinker to the board */
-
-// let blinker2 = document.getElementById('blinker2');
-// blinker2.onclick = ()=>{
-//   isBlinker = !isBlinker;
-// }
-// /** Add beacon to the board */
-
-// let beacon = document.getElementById('beacon');
-// beacon.onclick = ()=>{
-//   isBeacon = !isBeacon;
-// }
-// /** Add monogram to the board */
-
-// let monogram = document.getElementById('monogram');
-// monogram.onclick = ()=> {
-//   isMonogram = !isMonogram;
-// }
-
-
-
-
-
-
-
-
 var canvas = document.getElementById('gameWorld');
 var ctx = canvas.getContext('2d');
 const board = new Board();
@@ -77,23 +45,11 @@ let board  = [[]];
 class Board {
 
   constructor() {
-    // this.board = doubleGun;
-    // this.board = doubleGun;
+   
     this.board = this.initialize();
     this.count = 1;
 
-      // this.board[2][2] = 1;
-      // this.board[2][3] = 1;
-      // this.board[3][2] = 1;
-      // this.board[3][3] = 1;
-
-      // this.board[4][4] = 1;
-      // this.board[4][5] = 1;
-      // this.board[5][4] = 1;
-      // this.board[5][5] = 1; 
-
-      // Gosper Gun
-   this.board[10][3] = 1;
+    this.board[10][3] = 1;
     this.board[10][4] = 1;
     this.board[9][3] = 1;
     this.board[9][4] = 1;
@@ -183,70 +139,7 @@ class Board {
     this.board[31][12] = 1;
     this.board[31][13] = 1;
 
-   
-
-
-
-// gosper gun
-    // this.board[40][6] = 1;
-    // this.board[40][7] = 1;
-    // this.board[41][6] = 1;
-    // this.board[41][7] = 1;
-    
-    // this.board[40][16] = 1;
-    // this.board[41][16] = 1;
-    // this.board[42][16] = 1;
-    // this.board[39][17] = 1;
-    // this.board[38][18] = 1;
-    // this.board[38][19] = 1;
-    // this.board[39][21] = 1;
-    // this.board[40][22] = 1;
-    // this.board[41][22] = 1;
-    // this.board[41][23] = 1;
-    // this.board[41][30] = 1;
-    // this.board[42][22] = 1;
-    // this.board[43][21] = 1;
-    // this.board[44][19] = 1;
-    // this.board[44][18] = 1;
-    // this.board[43][17] = 1;
-    
-    // this.board[40][26] = 1;
-    // this.board[39][26] = 1;
-    // this.board[38][26] = 1;
-    
-    // this.board[38][27] = 1;
-    // this.board[40][27] = 1;
-    // this.board[39][27] = 1;
-    
-    
-    // this.board[37][28] = 1;
-    // this.board[37][30] = 1;
-    // this.board[36][30] = 1;
-    
-    // this.board[41][28] = 1;
-    // this.board[41][30] = 1;
-    // this.board[42][30] = 1;
-    
-    // this.board[39][42] = 1;
-    // this.board[38][42] = 1;
-    // this.board[39][41] = 1;
-    // this.board[38][41] = 1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
       board = this.board;
      this.countEdge = 0;
   }
@@ -331,10 +224,10 @@ class Board {
         let x = col * SQAURE_SIZE;
         let y = row * SQAURE_SIZE;
         if (this.board[row][col] === 1) {
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = foreGroundColors[count];
         }
         else {
-          ctx.fillStyle = 'darkblue';
+          ctx.fillStyle = backGroundColors[count];
         }
         ctx.fillRect(x, y, SQAURE_SIZE, SQAURE_SIZE);
         ctx.rect(x, y, SQAURE_SIZE, SQAURE_SIZE);
